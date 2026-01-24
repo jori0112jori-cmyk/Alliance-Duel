@@ -38,13 +38,13 @@ const duelData = [
             { text: { ja: '栄光の勲章を1枚消費', en: 'Use 1 Valor Badge' }, points: 750, id: 'action_2_2' },
             { text: { ja: 'レーダークエストを1回クリア', en: 'Complete 1 Radar task' }, points: 30000, id: 'action_2_3' },
             { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_2_4' },
-            { text: { ja: 'Lv.1ドローン部品宝箱', en: 'Lv.1 Drone Chest' }, points: 2750, id: 'action_2_5' },
-            { text: { ja: 'Lv.2ドローン部品宝箱', en: 'Lv.2 Drone Chest' }, points: 8250, id: 'action_2_6' },
-            { text: { ja: 'Lv.3ドローン部品宝箱', en: 'Lv.3 Drone Chest' }, points: 25000, id: 'action_2_7' },
-            { text: { ja: 'Lv.4ドローン部品宝箱', en: 'Lv.4 Drone Chest' }, points: 75000, id: 'action_2_8' },
-            { text: { ja: 'Lv.5ドローン部品宝箱', en: 'Lv.5 Drone Chest' }, points: 225000, id: 'action_2_9' },
-            { text: { ja: 'Lv.6ドローン部品宝箱', en: 'Lv.6 Drone Chest' }, points: 675000, id: 'action_2_10' },
-            { text: { ja: 'Lv.7ドローン部品宝箱', en: 'Lv.7 Drone Chest' }, points: 2025000, id: 'action_2_11' }
+            { text: { ja: 'Lv.1ドローン部品宝箱を開ける', en: 'Lv.1 Drone Chest' }, points: 2750, id: 'action_2_5' },
+            { text: { ja: 'Lv.2ドローン部品宝箱を開ける', en: 'Lv.2 Drone Chest' }, points: 8250, id: 'action_2_6' },
+            { text: { ja: 'Lv.3ドローン部品宝箱を開ける', en: 'Lv.3 Drone Chest' }, points: 25000, id: 'action_2_7' },
+            { text: { ja: 'Lv.4ドローン部品宝箱を開ける', en: 'Lv.4 Drone Chest' }, points: 75000, id: 'action_2_8' },
+            { text: { ja: 'Lv.5ドローン部品宝箱を開ける', en: 'Lv.5 Drone Chest' }, points: 225000, id: 'action_2_9' },
+            { text: { ja: 'Lv.6ドローン部品宝箱を開ける', en: 'Lv.6 Drone Chest' }, points: 675000, id: 'action_2_10' },
+            { text: { ja: 'Lv.7ドローン部品宝箱を開ける', en: 'Lv.7 Drone Chest' }, points: 2025000, id: 'action_2_11' }
         ]
     },
     { // Day 3: 木曜日
@@ -133,6 +133,7 @@ let lockedStates = {};
 const timeActionsKeywords = ["action_1_0", "action_2_0", "action_4_1", "action_4_3", "action_4_5", "action_5_2", "action_5_3", "action_5_4", "action_5_5"];
 const heroExpActionKeywords = ["action_0_2", "action_3_1"];
 
+// ▼▼▼ 修正: 入力時の挙動を安定化 ▼▼▼
 function createNumericInput(value, onBlur, readOnly = false) {
     const input = document.createElement('input');
     input.type = 'text'; 
@@ -142,7 +143,13 @@ function createNumericInput(value, onBlur, readOnly = false) {
     
     if(readOnly) input.classList.add('locked-input');
 
-    input.onfocus = function() { this.select(); };
+    // フォーカス時の全選択を少し遅延させる（スマホでの挙動安定のため）
+    input.onfocus = function() {
+        setTimeout(() => {
+            this.select();
+        }, 50);
+    };
+    
     input.onblur = onBlur;
     return input;
 }
@@ -332,7 +339,9 @@ function renderTable() {
                 inp.type = 'number';
                 inp.inputMode = 'decimal';
                 inp.value = val > 0 ? val : '';
-                inp.onfocus = function() { this.select(); };
+                inp.onfocus = function() { 
+                    setTimeout(() => { this.select(); }, 50); 
+                };
                 inp.onblur = callback;
                 return inp;
             };
@@ -521,7 +530,7 @@ document.getElementById('daySelect').onchange = (event) => {
     renderTable();
 };
 
-// 画面の「横幅」が変わったときだけ再描画する（キーボード出現による縦幅変化を無視）
+// ▼▼▼ 修正: 画面の「横幅」が変わったときだけ再描画する（キーボードによる縦幅変化を無視） ▼▼▼
 let lastWidth = window.innerWidth;
 window.addEventListener('resize', () => {
     if (window.innerWidth !== lastWidth) {
@@ -542,5 +551,4 @@ window.onload = function() {
     
     document.getElementById('tableContainer').style.visibility = 'visible';
     document.getElementById('tableContainer').style.opacity = '1';
-
 };
