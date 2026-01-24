@@ -99,43 +99,43 @@ const duelData = [
             { text: { ja: '治療時間を1分間短縮する', en: 'Healing Speedup' }, points: 150, id: 'action_5_5' },
 
             // ▼ 相手連盟の兵士撃破 (Lv1 - Lv11)
-            { text: { ja: '相手連盟のLv.1兵士を撃破する', en: 'Kill Rival Lv.1 Unit' }, points: 10, id: 'action_5_k_rival_1' },
-            { text: { ja: '相手連盟のLv.2兵士を撃破する', en: 'Kill Rival Lv.2 Unit' }, points: 15, id: 'action_5_k_rival_2' },
-            { text: { ja: '相手連盟のLv.3兵士を撃破する', en: 'Kill Rival Lv.3 Unit' }, points: 20, id: 'action_5_k_rival_3' },
-            { text: { ja: '相手連盟のLv.4兵士を撃破する', en: 'Kill Rival Lv.4 Unit' }, points: 25, id: 'action_5_k_rival_4' },
-            { text: { ja: '相手連盟のLv.5兵士を撃破する', en: 'Kill Rival Lv.5 Unit' }, points: 30, id: 'action_5_k_rival_5' },
-            { text: { ja: '相手連盟のLv.6兵士を撃破する', en: 'Kill Rival Lv.6 Unit' }, points: 35, id: 'action_5_k_rival_6' },
-            { text: { ja: '相手連盟のLv.7兵士を撃破する', en: 'Kill Rival Lv.7 Unit' }, points: 40, id: 'action_5_k_rival_7' },
-            { text: { ja: '相手連盟のLv.8兵士を撃破する', en: 'Kill Rival Lv.8 Unit' }, points: 45, id: 'action_5_k_rival_8' },
-            { text: { ja: '相手連盟のLv.9兵士を撃破する', en: 'Kill Rival Lv.9 Unit' }, points: 50, id: 'action_5_k_rival_9' },
-            { text: { ja: '相手連盟のLv.10兵士を撃破する', en: 'Kill Rival Lv.10 Unit' }, points: 55, id: 'action_5_k_rival_10' },
-            { text: { ja: '相手連盟のLv.11兵士を撃破する', en: 'Kill Rival Lv.11 Unit' }, points: 60, id: 'action_5_k_rival_11' }, // ★追加
+            { text: { ja: '相手連盟のLv.1兵士を撃破する', en: 'Kill Rival Lv.1 Unit' }, points: 30, id: 'action_5_k_rival_1' },
+            { text: { ja: '相手連盟のLv.2兵士を撃破する', en: 'Kill Rival Lv.2 Unit' }, points: 45, id: 'action_5_k_rival_2' },
+            { text: { ja: '相手連盟のLv.3兵士を撃破する', en: 'Kill Rival Lv.3 Unit' }, points: 60, id: 'action_5_k_rival_3' },
+            { text: { ja: '相手連盟のLv.4兵士を撃破する', en: 'Kill Rival Lv.4 Unit' }, points: 75, id: 'action_5_k_rival_4' },
+            { text: { ja: '相手連盟のLv.5兵士を撃破する', en: 'Kill Rival Lv.5 Unit' }, points: 90, id: 'action_5_k_rival_5' },
+            { text: { ja: '相手連盟のLv.6兵士を撃破する', en: 'Kill Rival Lv.6 Unit' }, points: 105, id: 'action_5_k_rival_6' },
+            { text: { ja: '相手連盟のLv.7兵士を撃破する', en: 'Kill Rival Lv.7 Unit' }, points: 120, id: 'action_5_k_rival_7' },
+            { text: { ja: '相手連盟のLv.8兵士を撃破する', en: 'Kill Rival Lv.8 Unit' }, points: 135, id: 'action_5_k_rival_8' },
+            { text: { ja: '相手連盟のLv.9兵士を撃破する', en: 'Kill Rival Lv.9 Unit' }, points: 150, id: 'action_5_k_rival_9' },
+            { text: { ja: '相手連盟のLv.10兵士を撃破する', en: 'Kill Rival Lv.10 Unit' }, points: 165, id: 'action_5_k_rival_10' },
+            { text: { ja: '相手連盟のLv.11兵士を撃破する', en: 'Kill Rival Lv.11 Unit' }, points: 180, id: 'action_5_k_rival_11' }, // ★追加
 
             // ▼ 通常の兵士撃破 (Lv1 - Lv11)
-            { text: { ja: 'Lv.1兵士を撃破する', en: 'Kill Lv.1 Unit' }, points: 2, id: 'action_5_k_norm_1' },
-            { text: { ja: 'Lv.2兵士を撃破する', en: 'Kill Lv.2 Unit' }, points: 3, id: 'action_5_k_norm_2' },
-            { text: { ja: 'Lv.3兵士を撃破する', en: 'Kill Lv.3 Unit' }, points: 4, id: 'action_5_k_norm_3' },
-            { text: { ja: 'Lv.4兵士を撃破する', en: 'Kill Lv.4 Unit' }, points: 5, id: 'action_5_k_norm_4' },
-            { text: { ja: 'Lv.5兵士を撃破する', en: 'Kill Lv.5 Unit' }, points: 6, id: 'action_5_k_norm_5' },
-            { text: { ja: 'Lv.6兵士を撃破する', en: 'Kill Lv.6 Unit' }, points: 7, id: 'action_5_k_norm_6' },
-            { text: { ja: 'Lv.7兵士を撃破する', en: 'Kill Lv.7 Unit' }, points: 8, id: 'action_5_k_norm_7' },
-            { text: { ja: 'Lv.8兵士を撃破する', en: 'Kill Lv.8 Unit' }, points: 9, id: 'action_5_k_norm_8' },
-            { text: { ja: 'Lv.9兵士を撃破する', en: 'Kill Lv.9 Unit' }, points: 10, id: 'action_5_k_norm_9' },
-            { text: { ja: 'Lv.10兵士を撃破する', en: 'Kill Lv.10 Unit' }, points: 11, id: 'action_5_k_norm_10' },
-            { text: { ja: 'Lv.11兵士を撃破する', en: 'Kill Lv.11 Unit' }, points: 12, id: 'action_5_k_norm_11' }, // ★追加
+            { text: { ja: 'Lv.1兵士を撃破する', en: 'Kill Lv.1 Unit' }, points: 6, id: 'action_5_k_norm_1' },
+            { text: { ja: 'Lv.2兵士を撃破する', en: 'Kill Lv.2 Unit' }, points: 9, id: 'action_5_k_norm_2' },
+            { text: { ja: 'Lv.3兵士を撃破する', en: 'Kill Lv.3 Unit' }, points: 12, id: 'action_5_k_norm_3' },
+            { text: { ja: 'Lv.4兵士を撃破する', en: 'Kill Lv.4 Unit' }, points: 15, id: 'action_5_k_norm_4' },
+            { text: { ja: 'Lv.5兵士を撃破する', en: 'Kill Lv.5 Unit' }, points: 18, id: 'action_5_k_norm_5' },
+            { text: { ja: 'Lv.6兵士を撃破する', en: 'Kill Lv.6 Unit' }, points: 21, id: 'action_5_k_norm_6' },
+            { text: { ja: 'Lv.7兵士を撃破する', en: 'Kill Lv.7 Unit' }, points: 24, id: 'action_5_k_norm_7' },
+            { text: { ja: 'Lv.8兵士を撃破する', en: 'Kill Lv.8 Unit' }, points: 27, id: 'action_5_k_norm_8' },
+            { text: { ja: 'Lv.9兵士を撃破する', en: 'Kill Lv.9 Unit' }, points: 30, id: 'action_5_k_norm_9' },
+            { text: { ja: 'Lv.10兵士を撃破する', en: 'Kill Lv.10 Unit' }, points: 33, id: 'action_5_k_norm_10' },
+            { text: { ja: 'Lv.11兵士を撃破する', en: 'Kill Lv.11 Unit' }, points: 36, id: 'action_5_k_norm_11' }, // ★追加
 
             // ▼ 兵士損失 (Lv1 - Lv11)
-            { text: { ja: 'Lv.1兵士を撃破される', en: 'Lose Lv.1 Unit' }, points: 2, id: 'action_5_lost_1' },
-            { text: { ja: 'Lv.2兵士を撃破される', en: 'Lose Lv.2 Unit' }, points: 3, id: 'action_5_lost_2' },
-            { text: { ja: 'Lv.3兵士を撃破される', en: 'Lose Lv.3 Unit' }, points: 4, id: 'action_5_lost_3' },
-            { text: { ja: 'Lv.4兵士を撃破される', en: 'Lose Lv.4 Unit' }, points: 5, id: 'action_5_lost_4' },
-            { text: { ja: 'Lv.5兵士を撃破される', en: 'Lose Lv.5 Unit' }, points: 6, id: 'action_5_lost_5' },
-            { text: { ja: 'Lv.6兵士を撃破される', en: 'Lose Lv.6 Unit' }, points: 7, id: 'action_5_lost_6' },
-            { text: { ja: 'Lv.7兵士を撃破される', en: 'Lose Lv.7 Unit' }, points: 8, id: 'action_5_lost_7' },
-            { text: { ja: 'Lv.8兵士を撃破される', en: 'Lose Lv.8 Unit' }, points: 9, id: 'action_5_lost_8' },
-            { text: { ja: 'Lv.9兵士を撃破される', en: 'Lose Lv.9 Unit' }, points: 10, id: 'action_5_lost_9' },
-            { text: { ja: 'Lv.10兵士を撃破される', en: 'Lose Lv.10 Unit' }, points: 11, id: 'action_5_lost_10' },
-            { text: { ja: 'Lv.11兵士を撃破される', en: 'Lose Lv.11 Unit' }, points: 12, id: 'action_5_lost_11' }, // ★追加
+            { text: { ja: 'Lv.1兵士を撃破される', en: 'Lose Lv.1 Unit' }, points: 5.0, id: 'action_5_lost_1' },
+            { text: { ja: 'Lv.2兵士を撃破される', en: 'Lose Lv.2 Unit' }, points: 7.5, id: 'action_5_lost_2' },
+            { text: { ja: 'Lv.3兵士を撃破される', en: 'Lose Lv.3 Unit' }, points: 10.0, id: 'action_5_lost_3' },
+            { text: { ja: 'Lv.4兵士を撃破される', en: 'Lose Lv.4 Unit' }, points: 12.5, id: 'action_5_lost_4' },
+            { text: { ja: 'Lv.5兵士を撃破される', en: 'Lose Lv.5 Unit' }, points: 15.0, id: 'action_5_lost_5' },
+            { text: { ja: 'Lv.6兵士を撃破される', en: 'Lose Lv.6 Unit' }, points: 17.5, id: 'action_5_lost_6' },
+            { text: { ja: 'Lv.7兵士を撃破される', en: 'Lose Lv.7 Unit' }, points: 20.0, id: 'action_5_lost_7' },
+            { text: { ja: 'Lv.8兵士を撃破される', en: 'Lose Lv.8 Unit' }, points: 22.5, id: 'action_5_lost_8' },
+            { text: { ja: 'Lv.9兵士を撃破される', en: 'Lose Lv.9 Unit' }, points: 25.0, id: 'action_5_lost_9' },
+            { text: { ja: 'Lv.10兵士を撃破される', en: 'Lose Lv.10 Unit' }, points: 27.5, id: 'action_5_lost_10' },
+            { text: { ja: 'Lv.11兵士を撃破される', en: 'Lose Lv.11 Unit' }, points: 30.0, id: 'action_5_lost_11' }, // ★追加
 
             { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_5_26' }
         ]
@@ -666,4 +666,5 @@ window.onload = function() {
     document.getElementById('tableContainer').style.visibility = 'visible';
     document.getElementById('tableContainer').style.opacity = '1';
 };
+
 
