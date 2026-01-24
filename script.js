@@ -521,7 +521,14 @@ document.getElementById('daySelect').onchange = (event) => {
     renderTable();
 };
 
-window.onresize = () => renderTable();
+// 画面の「横幅」が変わったときだけ再描画する（キーボード出現による縦幅変化を無視）
+let lastWidth = window.innerWidth;
+window.addEventListener('resize', () => {
+    if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        renderTable();
+    }
+});
 
 window.onload = function() {
     const savedLang = localStorage.getItem('calculatorLanguage');
@@ -535,4 +542,5 @@ window.onload = function() {
     
     document.getElementById('tableContainer').style.visibility = 'visible';
     document.getElementById('tableContainer').style.opacity = '1';
+
 };
