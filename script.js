@@ -86,9 +86,9 @@ const duelData = [
             { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_4_16' },
             { text: { ja: 'ドミネーターのかけらを消費', en: 'Overlord Promotion Shard' }, points: 25000, id: 'action_4_17' },
             { text: { ja: 'ドミネーターの訓練ノートを100個消費', en: '100 Training Guidebooks' }, points: 1562.5, id: 'action_4_18' },
-            { text: { ja: 'ドミネーターの訓練証明書を1枚消費', en: '100 Training Guidebooks' }, points: 1562.5, id: 'action_4_19' },
-            { text: { ja: 'ドミネーターの連携の証を1枚消費', en: '100 Training Guidebooks' }, points: 1562.5, id: 'action_4_20' },
-            { text: { ja: 'ドミネーターのスキルメダルを1枚消費', en: '100 Training Guidebooks' }, points: 1562.5, id: 'action_4_21' }
+            { text: { ja: 'ドミネーターの訓練証明書を1枚消費', en: '100 Training Guidebooks' }, points: 3750, id: 'action_4_19' },
+            { text: { ja: 'ドミネーターの連携の証を1枚消費', en: '100 Training Guidebooks' }, points: 75000, id: 'action_4_20' },
+            { text: { ja: 'ドミネーターのスキルメダルを1枚消費', en: '100 Training Guidebooks' }, points: 12.5, id: 'action_4_21' }
         ]
     },
     { // Day 5: 土曜日
@@ -669,6 +669,7 @@ window.onload = function() {
     document.getElementById('tableContainer').style.visibility = 'visible';
     document.getElementById('tableContainer').style.opacity = '1';
 };
+
 
 
 
