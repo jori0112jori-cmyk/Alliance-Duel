@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>連盟対決 ポイント計算ツール</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <h1>
+        <svg class="header-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="10" width="70" height="80" rx="8" ry="8" fill="#6c757d"/>
+            <rect x="22" y="18" width="56" height="20" rx="4" ry="4" fill="#212529"/>
+            <g fill="#FFF">
+                <rect x="25" y="45" width="12" height="12" rx="4" ry="4" fill="#4682B4"/>
+                <rect x="44" y="45" width="12" height="12" rx="4" ry="4" fill="#4682B4"/>
+                <rect x="63" y="45" width="12" height="12" rx="4" ry="4" fill="#4682B4"/>
+                <rect x="25" y="62" width="12" height="12" rx="4" ry="4" fill="#5cb85c"/>
+                <rect x="44" y="62" width="12" height="12" rx="4" ry="4" fill="#5cb85c"/>
+                <rect x="63" y="62" width="12" height="12" rx="4" ry="4" fill="#f0ad4e"/>
+                <rect x="25" y="79" width="31" height="12" rx="4" ry="4" fill="#d9534f"/>
+                <rect x="63" y="79" width="12" height="12" rx="4" ry="4" fill="#f0ad4e"/>
+            </g>
+        </svg>
+        <span data-i18n-key="pageTitle">連盟対決 ポイント計算</span>
+        <div class="header-spacer"></div>
+        <button id="langToggleBtn"></button>
+    </h1>
+
+    <div class="container">
+        <div class="controls">
+            <div class="control-group"></div>
+            <div class="control-group">
+                <label for="daySelect"><i class="fas fa-calendar-alt"></i> <span data-i18n-key="daySelectLabel">曜日選択</span>：</label>
+                <select id="daySelect"></select>
+            </div>
+            <div class="control-group">
+                <button id="saveBtn"><i class="fas fa-save"></i> <span data-i18n-key="saveButton">保存</span></button>
+                <button id="resetDayBtn"><i class="fas fa-redo"></i> <span data-i18n-key="resetButton">リセット</span></button>
+                <button id="resetAllBtn"><i class="fas fa-bomb"></i> <span data-i18n-key="resetAllButton">全リセット</span></button>
+            </div>
+        </div>
+
+        <div id="tableContainer"></div>
+    </div>
+
+    <div id="stickyActions" class="sticky-ui">
+        <div class="sticky-content-wrapper">
+            <div class="total-display-row">
+                <span class="label" data-i18n-key="totalPointsLabel">合計</span>
+                <span class="value" id="stickyTotalValue">0</span>
+            </div>
+            <div class="progress-container">
+                <div id="stickyProgressBar" class="progress-bar"></div>
+            </div>
+        </div>
+        <div class="sticky-buttons-row">
+            <button id="stickySaveBtn"><i class="fas fa-save"></i> <span data-i18n-key="saveButton">保存</span></button>
+            <button id="stickyResetDayBtn"><i class="fas fa-redo"></i> <span data-i18n-key="resetButton">リセット</span></button>
+            <button id="stickyResetAllBtn"><i class="fas fa-bomb"></i> <span data-i18n-key="resetAllButton">全リセット</span></button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
