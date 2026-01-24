@@ -3,7 +3,7 @@ const duelData = [
         title: { ja: '月曜日 (レーダー特訓)', en: 'Monday (Radar Training)' },
         actions: [
             { text: { ja: 'APを1消費する', en: 'Use 1 Stamina' }, points: 375, id: 'action_0_0' },
-            { text: { ja: 'レーダークエストを1回クリアする', en: 'Complete 1 Radar task' }, points: 30000, id: 'action_0_1' },
+            { text: { ja: 'レーダークエストを1回クリア', en: 'Complete 1 Radar task' }, points: 30000, id: 'action_0_1' },
             { text: { ja: '一度に英雄EXPを660以上消費する', en: 'Use at least 660+ Hero EXP' }, points: 2.5, id: 'action_0_2' },
             { text: { ja: 'ドローン戦闘データを1消費する', en: 'Use 1 Drone Battle Data' }, points: 7.5, id: 'action_0_3' },
             { text: { ja: 'ドローンギアを1個消費する', en: 'Use 1 Drone part' }, points: 6250, id: 'action_0_4' },
@@ -20,11 +20,11 @@ const duelData = [
     { // Day 1: 火曜日
         title: { ja: '火曜日 (基地建設)', en: 'Tuesday (Base Expansion)' },
         actions: [
-            { text: { ja: '建造時間を1分間短縮する', en: '1-min Construction Speed-up' }, points: 150, id: 'action_1_0' },
+            { text: { ja: '建造時間を1分間短縮', en: '1-min Construction Speed-up' }, points: 150, id: 'action_1_0' },
             { text: { ja: '施設建設で戦力を1獲得する', en: 'Increase Building Power by 1' }, points: 30, id: 'action_1_1' },
             { text: { ja: 'UR貿易輸送車を1回発車する', en: 'Dispatch UR Trade Truck' }, points: 300000, id: 'action_1_2' },
             { text: { ja: 'UR極秘任務を1回遂行する', en: 'Perform 1 UR secret task' }, points: 225000, id: 'action_1_3' },
-            { text: { ja: 'パック購入ダイヤを1個購入する', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_1_4' },
+            { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_1_4' },
             { text: { ja: '生存者募集を1回行う', en: 'Recruit Survivor' }, points: 4500, id: 'action_1_5' },
             { text: { ja: '兵装素材を1個使う', en: 'Use 1 Armament Material' }, points: 2.5, id: 'action_1_6' },
             { text: { ja: '兵装コアを1個使う', en: 'Use 1 Armament Core' }, points: 6250, id: 'action_1_7' }
@@ -33,11 +33,11 @@ const duelData = [
     { // Day 2: 水曜日
         title: { ja: '水曜日 (科学研究)', en: 'Wednesday (Age of Science)' },
         actions: [
-            { text: { ja: '科学研究時間を1分間短縮する', en: '1-min Research Speedup' }, points: 150, id: 'action_2_0' },
-            { text: { ja: '科学研究で戦力を1獲得する', en: 'Increase Tech Power by 1' }, points: 30, id: 'action_2_1' },
-            { text: { ja: '栄光の勲章を1枚消費する', en: 'Use 1 Valor Badge' }, points: 750, id: 'action_2_2' },
-            { text: { ja: 'レーダークエストを1回クリアする', en: 'Complete 1 Radar task' }, points: 30000, id: 'action_2_3' },
-            { text: { ja: 'パック購入ダイヤを1個購入する', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_2_4' },
+            { text: { ja: '科学研究時間を1分間短縮', en: '1-min Research Speedup' }, points: 150, id: 'action_2_0' },
+            { text: { ja: '科学研究で戦力を1獲得す', en: 'Increase Tech Power by 1' }, points: 30, id: 'action_2_1' },
+            { text: { ja: '栄光の勲章を1枚消費す', en: 'Use 1 Valor Badge' }, points: 750, id: 'action_2_2' },
+            { text: { ja: 'レーダークエストを1回クリア', en: 'Complete 1 Radar task' }, points: 30000, id: 'action_2_3' },
+            { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_2_4' },
             { text: { ja: 'Lv.1ドローン部品宝箱を開ける', en: 'Lv.1 Drone Chest' }, points: 2750, id: 'action_2_5' },
             { text: { ja: 'Lv.2ドローン部品宝箱を開ける', en: 'Lv.2 Drone Chest' }, points: 8250, id: 'action_2_6' },
             { text: { ja: 'Lv.3ドローン部品宝箱を開ける', en: 'Lv.3 Drone Chest' }, points: 25000, id: 'action_2_7' },
@@ -71,21 +71,24 @@ const duelData = [
             { text: { ja: '訓練時間を1分間短縮する', en: '1-min Training Speed-up' }, points: 150, id: 'action_4_5' },
             
             // 訓練項目 (Lv.1 - Lv.11)
-            { text: { ja: 'Lv.1兵士を1人訓練する', en: 'Train Lv.1 unit' }, points: 20, id: 'action_4_t1' },
-            { text: { ja: 'Lv.2兵士を1人訓練する', en: 'Train Lv.2 unit' }, points: 30, id: 'action_4_t2' },
-            { text: { ja: 'Lv.3兵士を1人訓練する', en: 'Train Lv.3 unit' }, points: 40, id: 'action_4_t3' },
-            { text: { ja: 'Lv.4兵士を1人訓練する', en: 'Train Lv.4 unit' }, points: 50, id: 'action_4_t4' },
-            { text: { ja: 'Lv.5兵士を1人訓練する', en: 'Train Lv.5 unit' }, points: 60, id: 'action_4_t5' },
-            { text: { ja: 'Lv.6兵士を1人訓練する', en: 'Train Lv.6 unit' }, points: 70, id: 'action_4_t6' },
-            { text: { ja: 'Lv.7兵士を1人訓練する', en: 'Train Lv.7 unit' }, points: 80, id: 'action_4_t7' },
-            { text: { ja: 'Lv.8兵士を1人訓練する', en: 'Train Lv.8 unit' }, points: 90, id: 'action_4_t8' },
-            { text: { ja: 'Lv.9兵士を1人訓練する', en: 'Train Lv.9 unit' }, points: 100, id: 'action_4_t9' },
-            { text: { ja: 'Lv.10兵士を1人訓練する', en: 'Train Lv.10 unit' }, points: 110, id: 'action_4_t10' },
-            { text: { ja: 'Lv.11兵士を1人訓練する', en: 'Train Lv.11 unit' }, points: 120, id: 'action_4_t11' }, // ★追加
+            { text: { ja: 'Lv.1兵士を1体訓練', en: 'Train Lv.1 unit' }, points: 20, id: 'action_4_t1' },
+            { text: { ja: 'Lv.2兵士を1体訓練', en: 'Train Lv.2 unit' }, points: 30, id: 'action_4_t2' },
+            { text: { ja: 'Lv.3兵士を1体訓練', en: 'Train Lv.3 unit' }, points: 40, id: 'action_4_t3' },
+            { text: { ja: 'Lv.4兵士を1体訓練', en: 'Train Lv.4 unit' }, points: 50, id: 'action_4_t4' },
+            { text: { ja: 'Lv.5兵士を1体訓練', en: 'Train Lv.5 unit' }, points: 60, id: 'action_4_t5' },
+            { text: { ja: 'Lv.6兵士を1体訓練', en: 'Train Lv.6 unit' }, points: 70, id: 'action_4_t6' },
+            { text: { ja: 'Lv.7兵士を1体訓練', en: 'Train Lv.7 unit' }, points: 80, id: 'action_4_t7' },
+            { text: { ja: 'Lv.8兵士を1体訓練', en: 'Train Lv.8 unit' }, points: 90, id: 'action_4_t8' },
+            { text: { ja: 'Lv.9兵士を1体訓練', en: 'Train Lv.9 unit' }, points: 100, id: 'action_4_t9' },
+            { text: { ja: 'Lv.10兵士を1体訓練', en: 'Train Lv.10 unit' }, points: 110, id: 'action_4_t10' },
+            { text: { ja: 'Lv.11兵士を1体訓練', en: 'Train Lv.11 unit' }, points: 120, id: 'action_4_t11' }, // ★追加
 
             { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_4_16' },
             { text: { ja: 'ドミネーターのかけらを消費', en: 'Overlord Promotion Shard' }, points: 25000, id: 'action_4_17' },
-            { text: { ja: '訓練ノートを100個消費', en: '100 Training Guidebooks' }, points: 1562.5, id: 'action_4_18' }
+            { text: { ja: 'ドミネーターの訓練ノートを100個消費', en: '100 Training Guidebooks' }, points: 1562.5, id: 'action_4_18' }
+            { text: { ja: 'ドミネーターの訓練証明書を1枚消費', en: '100 Training Guidebooks' }, points: 1562.5, id: 'action_4_19' }
+            { text: { ja: 'ドミネーターの連携の証を1枚消費', en: '100 Training Guidebooks' }, points: 1562.5, id: 'action_4_20' }
+        　  { text: { ja: 'ドミネーターのスキルメダルを1枚消費', en: '100 Training Guidebooks' }, points: 1562.5, id: 'action_4_21'}
         ]
     },
     { // Day 5: 土曜日
@@ -666,5 +669,6 @@ window.onload = function() {
     document.getElementById('tableContainer').style.visibility = 'visible';
     document.getElementById('tableContainer').style.opacity = '1';
 };
+
 
 
