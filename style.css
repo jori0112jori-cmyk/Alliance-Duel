@@ -16,7 +16,7 @@ body {
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    padding-bottom: 140px; /* 固定フッターの高さ分確保 */
+    padding-bottom: 160px; /* フッター分を確保 */
 }
 
 h1 {
@@ -42,9 +42,7 @@ h1 {
     filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
 }
 
-.header-spacer {
-    flex-grow: 1;
-}
+.header-spacer { flex-grow: 1; }
 
 #langToggleBtn {
     background: none;
@@ -88,13 +86,7 @@ h1 {
     flex-wrap: wrap;
 }
 
-label {
-    font-weight: bold;
-    color: #555;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+label { font-weight: bold; color: #555; display: flex; align-items: center; gap: 5px; }
 
 select {
     padding: 8px 12px;
@@ -118,38 +110,21 @@ button {
     gap: 6px;
 }
 
-button:active {
-    transform: translateY(1px);
-}
+button:active { transform: translateY(1px); }
 
 #saveBtn, #stickySaveBtn { background-color: var(--primary-color); color: #fff; }
-#saveBtn:hover, #stickySaveBtn:hover { background-color: #357abd; }
-
 #resetDayBtn, #stickyResetDayBtn { background-color: var(--warning-color); color: #333; }
-#resetDayBtn:hover, #stickyResetDayBtn:hover { background-color: #e0a800; }
-
 #resetAllBtn, #stickyResetAllBtn { background-color: var(--accent-color); color: #fff; }
-#resetAllBtn:hover, #stickyResetAllBtn:hover { background-color: #c0392b; }
 
-/* テーブル */
+/* ▼▼▼ テーブル基本スタイル（PC用） ▼▼▼ */
 table {
-    width: 1000px; /* 固定幅にして横スクロールさせる */
+    width: 100%;
     border-collapse: collapse;
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     border-radius: 8px;
     overflow: hidden;
-    table-layout: fixed; /* 列幅を固定 */
-}
-
-/* 横スクロール対応のコンテナ */
-#tableContainer {
-    width: 100%;
-    overflow-x: auto; /* 横スクロールを有効に */
-    -webkit-overflow-scrolling: touch; /* 滑らかなスクロール */
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    table-layout: fixed;
 }
 
 th, td {
@@ -166,14 +141,14 @@ th {
     white-space: nowrap;
 }
 
-/* 列幅の指定 */
-th:nth-child(1) { width: 300px; } /* 行動内容 */
-th:nth-child(2) { width: 140px; } /* ポイント */
-th:nth-child(3) { width: 180px; } /* 数量 */
-th:nth-child(4) { width: 140px; } /* 獲得ポイント */
-th:nth-child(5) { width: 100px; text-align: center; } /* クリア */
+/* 列幅設定（PC） */
+th:nth-child(1) { width: 30%; } /* 行動内容 */
+th:nth-child(2) { width: 20%; } /* ポイント単価 */
+th:nth-child(3) { width: 25%; } /* 数量 */
+th:nth-child(4) { width: 15%; } /* 獲得 */
+th:nth-child(5) { width: 10%; text-align: center; } /* クリア */
 
-/* 数値入力 */
+/* 入力欄 */
 input[type="text"], input[type="number"] {
     width: 100%;
     padding: 8px;
@@ -182,148 +157,61 @@ input[type="text"], input[type="number"] {
     text-align: right;
     font-size: 1rem;
     box-sizing: border-box;
-    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-input[type="text"]:focus, input[type="number"]:focus {
+input:focus {
     border-color: var(--primary-color);
     outline: none;
-    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
     background-color: #f0f8ff;
 }
 
-/* ロックされた入力欄 */
-input.locked-input {
-    background-color: #e9ecef;
-    color: #6c757d;
-    cursor: not-allowed;
-    border-color: #ced4da;
-}
-
-/* ボタンと入力のグループ */
-.button-group {
+/* 単位ボタン周り */
+.input-with-buttons {
     display: flex;
-    gap: 5px;
     align-items: center;
-}
-
-.lock-btn {
-    padding: 6px 10px;
-    background-color: #e9ecef;
-    color: #6c757d;
-    border: 1px solid #ced4da;
-}
-
-.lock-btn.locked {
-    background-color: #ffc107;
-    color: #333;
-    border-color: #ffc107;
-}
-
-.reset-btn {
-    padding: 6px 10px;
-    background-color: #e74c3c;
-    color: white;
-    font-size: 0.8rem;
+    gap: 4px;
     width: 100%;
-    justify-content: center;
 }
 
-/* 時間入力 */
-.time-inputs {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-}
-.time-inputs input {
-    width: 45px;
-    padding: 5px;
-    text-align: center;
-    font-size: 0.9rem;
+.input-with-buttons input {
+    flex: 1;
+    min-width: 0; /* Flex内でのサイズ崩れ防止 */
 }
 
-/* 合計行 */
-.total-row {
-    background-color: #2c3e50;
-    color: white;
-    font-weight: bold;
-}
-.total-row td {
-    font-size: 1.2rem;
-}
-.numeric {
-    text-align: right;
-    font-family: 'Roboto Mono', monospace; /* 数字を見やすく */
+.unit-btn {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    color: #495057;
+    font-size: 0.75rem;
+    padding: 8px 5px;
+    min-width: 28px;
+    flex-shrink: 0; /* ボタンが潰れないように */
 }
 
-/* 固定フッター */
+.lock-btn { padding: 8px; background-color: #e9ecef; border: 1px solid #ced4da; }
+.lock-btn.locked { background-color: #ffc107; border-color: #ffc107; }
+
+/* スマホ用固定フッター */
 .sticky-ui {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid #ccc;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     z-index: 100;
-    padding: 10px 15px; /* 上下パディングを調整 */
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-bottom: max(10px, env(safe-area-inset-bottom)); /* iPhone X系対応 */
+    padding: 10px 15px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
 }
 
-.sticky-content-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    gap: 5px;
-}
-
-.total-display-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-}
-
-.total-display-row .label { font-size: 0.9rem; color: #555; }
-.total-display-row .value { font-size: 1.4rem; color: var(--primary-color); font-family: 'Roboto Mono', monospace; }
-
-.progress-container {
-    width: 100%;
-    height: 6px;
-    background-color: #e9ecef;
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background-color: var(--accent-color);
-    width: 0%;
-    transition: width 0.3s ease, background-color 0.3s ease;
-}
-
-.sticky-buttons-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.sticky-buttons-row button {
-    flex: 1;
-    justify-content: center;
-    padding: 10px 0; /* ボタンの高さを確保 */
-    font-size: 0.9rem;
-}
+.sticky-content-wrapper { max-width: 600px; margin: 0 auto; }
+.total-display-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.total-display-row .value { font-size: 1.4rem; color: var(--primary-color); font-weight: bold; }
+.progress-container { width: 100%; height: 6px; background: #e9ecef; border-radius: 3px; overflow: hidden; }
+.progress-bar { height: 100%; background: var(--accent-color); width: 0%; transition: width 0.3s; }
+.sticky-buttons-row { display: flex; gap: 10px; max-width: 600px; margin: 10px auto 0; }
+.sticky-buttons-row button { flex: 1; justify-content: center; padding: 10px 0; }
 
 /* 通知トースト */
 .toast-notification {
@@ -337,54 +225,103 @@ input.locked-input {
     border-radius: 25px;
     font-size: 0.9rem;
     opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: 0.3s;
     z-index: 2000;
     pointer-events: none;
 }
-.toast-notification.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
+.toast-notification.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ▼▼▼ 単位ボタンのデザイン（新規追加） ▼▼▼ */
-.input-with-buttons {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-}
+/* ▼▼▼ スマホ用カード表示設定 (ここが重要) ▼▼▼ */
+@media screen and (max-width: 768px) {
+    /* 1. 表の構造をブロック崩しにする */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
 
-.input-with-buttons input {
-    flex: 1; /* 入力欄を可能な限り広げる */
-    min-width: 50px; /* 最小幅を確保 */
-}
+    /* 2. ヘッダー行を隠す */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
 
-.unit-btn {
-    background-color: #e9ecef;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    color: #495057;
-    font-size: 0.75rem; /* 文字を小さめに */
-    padding: 6px 4px;   /* 押しやすい範囲を確保 */
-    cursor: pointer;
-    font-weight: bold;
-    min-width: 24px;    /* ボタンの幅を統一 */
-    touch-action: manipulation; /* スマホでの連打防止 */
-}
-
-.unit-btn:active {
-    background-color: #dee2e6;
-    transform: translateY(1px);
-}
-
-/* スマホ向け調整 */
-@media (max-width: 768px) {
-    .controls { flex-direction: column; align-items: stretch; gap: 10px; }
-    .control-group { justify-content: space-between; width: 100%; }
-    h1 { font-size: 1rem; padding: 10px; }
-    #tableContainer { margin-bottom: 0; }
+    /* 3. 各行を「カード」にする */
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        padding: 5px;
+    }
     
-    /* リセットボタンの文字をアイコンだけにする等の調整 */
-    .reset-btn span { display: none; }
-    .reset-btn i { margin: 0; }
-    th:nth-child(5) { width: 50px; }
+    /* 4. 合計行の特別扱い */
+    tfoot tr {
+        border: none;
+        background: none;
+        box-shadow: none;
+    }
+
+    /* 5. 各セルのデザイン */
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding: 10px 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap; /* 内容が多いときに折り返す */
+    }
+
+    td:last-child {
+        border-bottom: none;
+    }
+
+    /* 6. ラベル（見出し）をCSSで擬似的に追加 */
+    td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #555;
+        font-size: 0.9rem;
+        margin-right: 10px;
+        flex-basis: 30%; /* ラベルの幅確保 */
+    }
+
+    /* 7. 行動名（一番上のセル）を目立たせる */
+    td.action-name {
+        background-color: #f8f9fa;
+        font-weight: bold;
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+        display: block; /* 全幅使う */
+        padding: 10px;
+        text-align: center;
+    }
+    td.action-name:before {
+        display: none; /* 行動名のセルには「行動内容」というラベルを表示しない */
+    }
+
+    /* 8. 入力欄の調整 */
+    td .button-group, 
+    td .input-with-buttons, 
+    td .time-inputs,
+    td input {
+        flex: 1; /* 残りの幅いっぱい使う */
+        max-width: 100%; /* はみ出し防止 */
+    }
+    
+    /* 9. ボタン類を押しやすく */
+    .unit-btn {
+        padding: 10px 8px; /* 少し大きく */
+        min-width: 35px;
+    }
+    
+    /* 10. クリアボタン */
+    .reset-cell-container {
+        justify-content: flex-end;
+    }
+    .reset-btn span {
+        display: inline; /* スマホでも「クリア」文字を表示 */
+    }
 }
