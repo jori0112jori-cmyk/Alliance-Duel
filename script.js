@@ -133,7 +133,7 @@ let lockedStates = {};
 const timeActionsKeywords = ["action_1_0", "action_2_0", "action_4_1", "action_4_3", "action_4_5", "action_5_2", "action_5_3", "action_5_4", "action_5_5"];
 const heroExpActionKeywords = ["action_0_2", "action_3_1"];
 
-function createNumericInput(value, onBlur, readOnly = false) {
+function createNumericInput(value, onBlur, readOnly = false, onInput = null) {
     const input = document.createElement('input');
     input.type = 'text'; 
     input.inputMode = 'decimal'; 
@@ -147,6 +147,9 @@ function createNumericInput(value, onBlur, readOnly = false) {
     };
     
     input.onblur = onBlur;
+    if (onInput) {
+        input.oninput = onInput;
+    }
     return input;
 }
 
@@ -207,7 +210,6 @@ function formatWithUnit(num) {
     return formatted.replace(/\.00(?=[a-zA-Z])/, '').replace(/(\.\d)0(?=[a-zA-Z])/, '$1');
 }
 
-// ▼▼▼ 数値変換ロジック（強化版：小数＋単位、全角対応） ▼▼▼
 function cleanAndParseNumber(value) {
     if (typeof value === 'number') return value;
     if (!value) return 0;
@@ -275,7 +277,7 @@ function saveAllData() {
     localStorage.setItem('pointCalculationLockedStates', JSON.stringify(lockedStates));
 }
 
-// ▼▼▼ テーブル描画ロジック（単位ボタン追加版） ▼▼▼
+// ▼▼▼ テーブル描画ロジック（ボタン選択表示対応版） ▼▼▼
 function renderTable() {
     const container = document.getElementById("tableContainer");
     container.innerHTML = '';
@@ -332,13 +334,12 @@ function renderTable() {
         buttonGroup.append(pointsInput, lockButton);
         pointsCell.appendChild(buttonGroup);
 
-        // 3. 数量（ここにK, M, Gボタンを追加）
+        // 3. 数量
         const quantityCell = row.insertCell();
         quantityCell.className = 'numeric';
         quantityCell.setAttribute('data-label', headers[2]);
 
         if (timeActionsKeywords.includes(actionId)) {
-            // 時間系
             const timeWrapper = document.createElement('div');
             timeWrapper.className = 'time-inputs';
             const totalMinutes = quantity || 0;
@@ -369,15 +370,36 @@ function renderTable() {
             timeWrapper.append(daysInput, document.createTextNode('d'), hoursInput, document.createTextNode('h'), minutesInput, document.createTextNode('m'));
             quantityCell.appendChild(timeWrapper);
         } else {
-            // 通常の数値入力 + KMGボタン
+            // ★単位ボタンのロジック
             const wrapper = document.createElement('div');
             wrapper.className = 'input-with-buttons';
 
+            // ボタンの参照を保持するための配列
+            const unitButtons = [];
+
+            // 単位ボタンの状態を更新する関数
+            const updateButtonStates = (inputValue) => {
+                const str = inputValue.toString().toLowerCase().trim();
+                unitButtons.forEach(btn => {
+                    const unit = btn.textContent.toLowerCase();
+                    if (str.endsWith(unit)) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            };
+
             const quantityInput = createNumericInput(
                 formatWithUnit(quantity),
-                () => {
+                () => { // onBlur
                     allDaysData[currentDayIndex][index][2] = cleanAndParseNumber(quantityInput.value);
                     recalculateRow(index, 'quantity');
+                    updateButtonStates(quantityInput.value);
+                },
+                false,
+                (e) => { // onInput (入力中に即時反映)
+                    updateButtonStates(e.target.value);
                 }
             );
 
@@ -387,13 +409,27 @@ function renderTable() {
                 btn.textContent = unit;
                 btn.className = 'unit-btn';
                 btn.type = 'button';
+                
                 btn.onclick = () => {
-                    let currentVal = quantityInput.value;
+                    let currentVal = quantityInput.value.toString().trim();
+                    // 既に末尾に単位がある場合、それを削除してから新しい単位をつける
+                    // (例: "1.5m" の状態で "G" を押したら "1.5g" にする)
+                    if (/[kmg]$/i.test(currentVal)) {
+                        currentVal = currentVal.slice(0, -1);
+                    }
+                    
                     if (!currentVal) currentVal = "0";
                     quantityInput.value = currentVal + unit;
+                    
+                    // 保存と再計算
                     allDaysData[currentDayIndex][index][2] = cleanAndParseNumber(quantityInput.value);
                     recalculateRow(index, 'quantity');
+                    
+                    // ボタンの光り方を更新
+                    updateButtonStates(quantityInput.value);
                 };
+                
+                unitButtons.push(btn); // 配列に追加して後で操作できるようにする
                 return btn;
             };
 
@@ -401,6 +437,9 @@ function renderTable() {
             wrapper.appendChild(createUnitBtn('K'));
             wrapper.appendChild(createUnitBtn('M'));
             wrapper.appendChild(createUnitBtn('G'));
+            
+            // 初期表示時にボタンの状態を反映
+            updateButtonStates(quantityInput.value);
 
             quantityCell.appendChild(wrapper);
         }
@@ -565,7 +604,6 @@ document.getElementById('daySelect').onchange = (event) => {
     renderTable();
 };
 
-// ▼▼▼ 画面の「横幅」が変わったときだけ再描画する（キーボードによる縦幅変化を無視） ▼▼▼
 let lastWidth = window.innerWidth;
 window.addEventListener('resize', () => {
     if (window.innerWidth !== lastWidth) {
