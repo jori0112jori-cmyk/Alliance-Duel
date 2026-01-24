@@ -20,11 +20,11 @@ const duelData = [
     { // Day 1: 火曜日
         title: { ja: '火曜日 (基地建設)', en: 'Tuesday (Base Expansion)' },
         actions: [
-            { text: { ja: '建造時間を1分間短縮', en: '1-min Construction Speed-up' }, points: 150, id: 'action_1_0' },
-            { text: { ja: '施設建設で戦力を1獲得', en: 'Increase Building Power by 1' }, points: 30, id: 'action_1_1' },
-            { text: { ja: 'UR貿易輸送車を1回発車', en: 'Dispatch UR Trade Truck' }, points: 300000, id: 'action_1_2' },
-            { text: { ja: 'UR極秘任務を1回遂行', en: 'Perform 1 UR secret task' }, points: 225000, id: 'action_1_3' },
-            { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_1_4' },
+            { text: { ja: '建造時間を1分間短縮する', en: '1-min Construction Speed-up' }, points: 150, id: 'action_1_0' },
+            { text: { ja: '施設建設で戦力を1獲得する', en: 'Increase Building Power by 1' }, points: 30, id: 'action_1_1' },
+            { text: { ja: 'UR貿易輸送車を1回発車する', en: 'Dispatch UR Trade Truck' }, points: 300000, id: 'action_1_2' },
+            { text: { ja: 'UR極秘任務を1回遂行する', en: 'Perform 1 UR secret task' }, points: 225000, id: 'action_1_3' },
+            { text: { ja: 'パック購入ダイヤを1個購入する', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_1_4' },
             { text: { ja: '生存者募集を1回行う', en: 'Recruit Survivor' }, points: 4500, id: 'action_1_5' },
             { text: { ja: '兵装素材を1個使う', en: 'Use 1 Armament Material' }, points: 2.5, id: 'action_1_6' },
             { text: { ja: '兵装コアを1個使う', en: 'Use 1 Armament Core' }, points: 6250, id: 'action_1_7' }
@@ -33,11 +33,11 @@ const duelData = [
     { // Day 2: 水曜日
         title: { ja: '水曜日 (科学研究)', en: 'Wednesday (Age of Science)' },
         actions: [
-            { text: { ja: '科学研究時間を1分間短縮', en: '1-min Research Speedup' }, points: 150, id: 'action_2_0' },
-            { text: { ja: '科学研究で戦力を1獲得', en: 'Increase Tech Power by 1' }, points: 30, id: 'action_2_1' },
-            { text: { ja: '栄光の勲章を1枚消費', en: 'Use 1 Valor Badge' }, points: 750, id: 'action_2_2' },
-            { text: { ja: 'レーダークエストを1回クリア', en: 'Complete 1 Radar task' }, points: 30000, id: 'action_2_3' },
-            { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_2_4' },
+            { text: { ja: '科学研究時間を1分間短縮する', en: '1-min Research Speedup' }, points: 150, id: 'action_2_0' },
+            { text: { ja: '科学研究で戦力を1獲得する', en: 'Increase Tech Power by 1' }, points: 30, id: 'action_2_1' },
+            { text: { ja: '栄光の勲章を1枚消費する', en: 'Use 1 Valor Badge' }, points: 750, id: 'action_2_2' },
+            { text: { ja: 'レーダークエストを1回クリアする', en: 'Complete 1 Radar task' }, points: 30000, id: 'action_2_3' },
+            { text: { ja: 'パック購入ダイヤを1個購入する', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_2_4' },
             { text: { ja: 'Lv.1ドローン部品宝箱を開ける', en: 'Lv.1 Drone Chest' }, points: 2750, id: 'action_2_5' },
             { text: { ja: 'Lv.2ドローン部品宝箱を開ける', en: 'Lv.2 Drone Chest' }, points: 8250, id: 'action_2_6' },
             { text: { ja: 'Lv.3ドローン部品宝箱を開ける', en: 'Lv.3 Drone Chest' }, points: 25000, id: 'action_2_7' },
@@ -51,30 +51,38 @@ const duelData = [
         title: { ja: '木曜日 (英雄育成)', en: 'Thursday (Train Heroes)' },
         actions: [
             { text: { ja: '英雄募集を1回行う', en: 'Elite Recruit' }, points: 4500, id: 'action_3_0' },
-            { text: { ja: '一度に英雄EXPを660以上消費', en: 'Use 660+ Hero EXP' }, points: 2.5, id: 'action_3_1' },
-            { text: { ja: 'UR英雄かけらを1枚消費', en: 'Use 1 Legendary Shard' }, points: 25000, id: 'action_3_2' },
-            { text: { ja: 'SSR英雄かけらを1枚消費', en: 'Use 1 Epic Shard' }, points: 8750, id: 'action_3_3' },
-            { text: { ja: 'SR英雄かけらを1枚消費', en: 'Use 1 Rare Shard' }, points: 2500, id: 'action_3_4' },
-            { text: { ja: 'スキルメダルを1枚消費', en: 'Use 1 Skill Medal' }, points: 25, id: 'action_3_5' },
-            { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_3_6' },
-            { text: { ja: '専用武装のかけらを1枚消費', en: 'Use Exclusive Weapon shard' }, points: 25000, id: 'action_3_7' }
+            { text: { ja: '一度に英雄EXPを660以上消費する', en: 'Use 660+ Hero EXP' }, points: 2.5, id: 'action_3_1' },
+            { text: { ja: 'UR英雄かけらを1枚消費する', en: 'Use 1 Legendary Shard' }, points: 25000, id: 'action_3_2' },
+            { text: { ja: 'SSR英雄かけらを1枚消費する', en: 'Use 1 Epic Shard' }, points: 8750, id: 'action_3_3' },
+            { text: { ja: 'SR英雄かけらを1枚消費する', en: 'Use 1 Rare Shard' }, points: 2500, id: 'action_3_4' },
+            { text: { ja: 'スキルメダルを1枚消費する', en: 'Use 1 Skill Medal' }, points: 25, id: 'action_3_5' },
+            { text: { ja: 'パック購入ダイヤを1個購入する', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_3_6' },
+            { text: { ja: '専用武装のかけらを1枚消費する', en: 'Use Exclusive Weapon shard' }, points: 25000, id: 'action_3_7' }
         ]
     },
     { // Day 4: 金曜日
         title: { ja: '金曜日 (戦争準備)', en: 'Friday (Total Mobilization)' },
         actions: [
-            { text: { ja: 'レーダークエストを1回クリア', en: 'Complete 1 Radar task' }, points: 30000, id: 'action_4_0' },
-            { text: { ja: '建造時間を1分間短縮', en: '1-min Construction Speed-up' }, points: 150, id: 'action_4_1' },
-            { text: { ja: '施設建設で戦力を1獲得', en: 'Increase Building Power by 1' }, points: 30, id: 'action_4_2' },
-            { text: { ja: '科学研究時間を1分間短縮', en: '1-min research Speed-up' }, points: 150, id: 'action_4_3' },
-            { text: { ja: '科学研究で戦力を1獲得', en: 'Increase Tech Power by 1' }, points: 30, id: 'action_4_4' },
-            { text: { ja: '訓練時間を1分間短縮', en: '1-min Training Speed-up' }, points: 150, id: 'action_4_5' },
-            { text: { ja: 'Lv.1兵士を1人訓練', en: 'Train Lv.1 unit' }, points: 60, id: 'action_4_6' },
-            { text: { ja: 'Lv.5兵士を1人訓練', en: 'Train Lv.5 unit' }, points: 180, id: 'action_4_10' },
-            { text: { ja: 'Lv.7兵士を1人訓練', en: 'Train Lv.7 unit' }, points: 240, id: 'action_4_12' },
-            { text: { ja: 'Lv.8兵士を1人訓練', en: 'Train Lv.8 unit' }, points: 270, id: 'action_4_13' },
-            { text: { ja: 'Lv.9兵士を1人訓練', en: 'Train Lv.9 unit' }, points: 300, id: 'action_4_14' },
-            { text: { ja: 'Lv.10兵士を1人訓練', en: 'Train Lv.10 unit' }, points: 330, id: 'action_4_15' },
+            { text: { ja: 'レーダークエストを1回クリアする', en: 'Complete 1 Radar task' }, points: 30000, id: 'action_4_0' },
+            { text: { ja: '建造時間を1分間短縮する', en: '1-min Construction Speed-up' }, points: 150, id: 'action_4_1' },
+            { text: { ja: '施設建設で戦力を1獲得する', en: 'Increase Building Power by 1' }, points: 30, id: 'action_4_2' },
+            { text: { ja: '科学研究時間を1分間短縮する', en: '1-min research Speed-up' }, points: 150, id: 'action_4_3' },
+            { text: { ja: '科学研究で戦力を1獲得する', en: 'Increase Tech Power by 1' }, points: 30, id: 'action_4_4' },
+            { text: { ja: '訓練時間を1分間短縮する', en: '1-min Training Speed-up' }, points: 150, id: 'action_4_5' },
+            
+            // 訓練項目 (Lv.1 - Lv.11)
+            { text: { ja: 'Lv.1兵士を1人訓練する', en: 'Train Lv.1 unit' }, points: 20, id: 'action_4_t1' },
+            { text: { ja: 'Lv.2兵士を1人訓練する', en: 'Train Lv.2 unit' }, points: 30, id: 'action_4_t2' },
+            { text: { ja: 'Lv.3兵士を1人訓練する', en: 'Train Lv.3 unit' }, points: 40, id: 'action_4_t3' },
+            { text: { ja: 'Lv.4兵士を1人訓練する', en: 'Train Lv.4 unit' }, points: 50, id: 'action_4_t4' },
+            { text: { ja: 'Lv.5兵士を1人訓練する', en: 'Train Lv.5 unit' }, points: 60, id: 'action_4_t5' },
+            { text: { ja: 'Lv.6兵士を1人訓練する', en: 'Train Lv.6 unit' }, points: 70, id: 'action_4_t6' },
+            { text: { ja: 'Lv.7兵士を1人訓練する', en: 'Train Lv.7 unit' }, points: 80, id: 'action_4_t7' },
+            { text: { ja: 'Lv.8兵士を1人訓練する', en: 'Train Lv.8 unit' }, points: 90, id: 'action_4_t8' },
+            { text: { ja: 'Lv.9兵士を1人訓練する', en: 'Train Lv.9 unit' }, points: 100, id: 'action_4_t9' },
+            { text: { ja: 'Lv.10兵士を1人訓練する', en: 'Train Lv.10 unit' }, points: 110, id: 'action_4_t10' },
+            { text: { ja: 'Lv.11兵士を1人訓練する', en: 'Train Lv.11 unit' }, points: 120, id: 'action_4_t11' }, // ★追加
+
             { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_4_16' },
             { text: { ja: 'ドミネーターのかけらを消費', en: 'Overlord Promotion Shard' }, points: 25000, id: 'action_4_17' },
             { text: { ja: '訓練ノートを100個消費', en: '100 Training Guidebooks' }, points: 1562.5, id: 'action_4_18' }
@@ -83,18 +91,52 @@ const duelData = [
     { // Day 5: 土曜日
         title: { ja: '土曜日 (連盟奇襲)', en: 'Saturday (Enemy Buster)' },
         actions: [
-            { text: { ja: 'UR貿易輸送車を1回発車', en: 'Dispatch UR Trade Truck' }, points: 30000, id: 'action_5_0' },
-            { text: { ja: 'UR極秘任務を1回遂行', en: 'Legendary Secret Task' }, points: 225000, id: 'action_5_1' },
-            { text: { ja: '建造時間を1分間短縮', en: '1-min Construction Speedup' }, points: 150, id: 'action_5_2' },
-            { text: { ja: '科学研究時間を1分間短縮', en: '1-min Research Speedup' }, points: 150, id: 'action_5_3' },
-            { text: { ja: '訓練時間を1分間短縮', en: '1-min Training Speedup' }, points: 150, id: 'action_5_4' },
-            { text: { ja: '治療時間を1分間短縮', en: 'Healing Speedup' }, points: 150, id: 'action_5_5' },
-            { text: { ja: '相手連盟Lv.8兵士を撃破', en: 'Kill Rival Lv.8 Unit' }, points: 132.7, id: 'action_5_13' },
-            { text: { ja: '相手連盟Lv.9兵士を撃破', en: 'Kill Rival Lv.9 Unit' }, points: 147.5, id: 'action_5_14' },
-            { text: { ja: '相手連盟Lv.10兵士を撃破', en: 'Kill Rival Lv.10 Unit' }, points: 151.3, id: 'action_5_15' },
-            { text: { ja: 'Lv.8兵士を撃破', en: 'Kill Lv.8 Unit' }, points: 26.5, id: 'action_5_23' },
-            { text: { ja: 'Lv.9兵士を撃破', en: 'Kill Lv.9 Unit' }, points: 29.5, id: 'action_5_24' },
-            { text: { ja: 'Lv.10兵士を撃破', en: 'Kill Lv.10 Unit' }, points: 32.4, id: 'action_5_25' },
+            { text: { ja: 'UR貿易輸送車を1回発車する', en: 'Dispatch UR Trade Truck' }, points: 30000, id: 'action_5_0' },
+            { text: { ja: 'UR極秘任務を1回遂行する', en: 'Legendary Secret Task' }, points: 225000, id: 'action_5_1' },
+            { text: { ja: '建造時間を1分間短縮する', en: '1-min Construction Speedup' }, points: 150, id: 'action_5_2' },
+            { text: { ja: '科学研究時間を1分間短縮する', en: '1-min Research Speedup' }, points: 150, id: 'action_5_3' },
+            { text: { ja: '訓練時間を1分間短縮する', en: '1-min Training Speedup' }, points: 150, id: 'action_5_4' },
+            { text: { ja: '治療時間を1分間短縮する', en: 'Healing Speedup' }, points: 150, id: 'action_5_5' },
+
+            // ▼ 相手連盟の兵士撃破 (Lv1 - Lv11)
+            { text: { ja: '相手連盟Lv.1兵士を撃破する', en: 'Kill Rival Lv.1 Unit' }, points: 10, id: 'action_5_k_rival_1' },
+            { text: { ja: '相手連盟Lv.2兵士を撃破する', en: 'Kill Rival Lv.2 Unit' }, points: 15, id: 'action_5_k_rival_2' },
+            { text: { ja: '相手連盟Lv.3兵士を撃破する', en: 'Kill Rival Lv.3 Unit' }, points: 20, id: 'action_5_k_rival_3' },
+            { text: { ja: '相手連盟Lv.4兵士を撃破する', en: 'Kill Rival Lv.4 Unit' }, points: 25, id: 'action_5_k_rival_4' },
+            { text: { ja: '相手連盟Lv.5兵士を撃破する', en: 'Kill Rival Lv.5 Unit' }, points: 30, id: 'action_5_k_rival_5' },
+            { text: { ja: '相手連盟Lv.6兵士を撃破する', en: 'Kill Rival Lv.6 Unit' }, points: 35, id: 'action_5_k_rival_6' },
+            { text: { ja: '相手連盟Lv.7兵士を撃破する', en: 'Kill Rival Lv.7 Unit' }, points: 40, id: 'action_5_k_rival_7' },
+            { text: { ja: '相手連盟Lv.8兵士を撃破する', en: 'Kill Rival Lv.8 Unit' }, points: 45, id: 'action_5_k_rival_8' },
+            { text: { ja: '相手連盟Lv.9兵士を撃破する', en: 'Kill Rival Lv.9 Unit' }, points: 50, id: 'action_5_k_rival_9' },
+            { text: { ja: '相手連盟Lv.10兵士を撃破する', en: 'Kill Rival Lv.10 Unit' }, points: 55, id: 'action_5_k_rival_10' },
+            { text: { ja: '相手連盟Lv.11兵士を撃破する', en: 'Kill Rival Lv.11 Unit' }, points: 60, id: 'action_5_k_rival_11' }, // ★追加
+
+            // ▼ 通常の兵士撃破 (Lv1 - Lv11)
+            { text: { ja: 'Lv.1兵士を撃破する', en: 'Kill Lv.1 Unit' }, points: 2, id: 'action_5_k_norm_1' },
+            { text: { ja: 'Lv.2兵士を撃破する', en: 'Kill Lv.2 Unit' }, points: 3, id: 'action_5_k_norm_2' },
+            { text: { ja: 'Lv.3兵士を撃破する', en: 'Kill Lv.3 Unit' }, points: 4, id: 'action_5_k_norm_3' },
+            { text: { ja: 'Lv.4兵士を撃破する', en: 'Kill Lv.4 Unit' }, points: 5, id: 'action_5_k_norm_4' },
+            { text: { ja: 'Lv.5兵士を撃破する', en: 'Kill Lv.5 Unit' }, points: 6, id: 'action_5_k_norm_5' },
+            { text: { ja: 'Lv.6兵士を撃破する', en: 'Kill Lv.6 Unit' }, points: 7, id: 'action_5_k_norm_6' },
+            { text: { ja: 'Lv.7兵士を撃破する', en: 'Kill Lv.7 Unit' }, points: 8, id: 'action_5_k_norm_7' },
+            { text: { ja: 'Lv.8兵士を撃破する', en: 'Kill Lv.8 Unit' }, points: 9, id: 'action_5_k_norm_8' },
+            { text: { ja: 'Lv.9兵士を撃破する', en: 'Kill Lv.9 Unit' }, points: 10, id: 'action_5_k_norm_9' },
+            { text: { ja: 'Lv.10兵士を撃破する', en: 'Kill Lv.10 Unit' }, points: 11, id: 'action_5_k_norm_10' },
+            { text: { ja: 'Lv.11兵士を撃破する', en: 'Kill Lv.11 Unit' }, points: 12, id: 'action_5_k_norm_11' }, // ★追加
+
+            // ▼ 兵士損失 (Lv1 - Lv11)
+            { text: { ja: 'Lv.1兵士を撃破される', en: 'Lose Lv.1 Unit' }, points: 2, id: 'action_5_lost_1' },
+            { text: { ja: 'Lv.2兵士を撃破される', en: 'Lose Lv.2 Unit' }, points: 3, id: 'action_5_lost_2' },
+            { text: { ja: 'Lv.3兵士を撃破される', en: 'Lose Lv.3 Unit' }, points: 4, id: 'action_5_lost_3' },
+            { text: { ja: 'Lv.4兵士を撃破される', en: 'Lose Lv.4 Unit' }, points: 5, id: 'action_5_lost_4' },
+            { text: { ja: 'Lv.5兵士を撃破される', en: 'Lose Lv.5 Unit' }, points: 6, id: 'action_5_lost_5' },
+            { text: { ja: 'Lv.6兵士を撃破される', en: 'Lose Lv.6 Unit' }, points: 7, id: 'action_5_lost_6' },
+            { text: { ja: 'Lv.7兵士を撃破される', en: 'Lose Lv.7 Unit' }, points: 8, id: 'action_5_lost_7' },
+            { text: { ja: 'Lv.8兵士を撃破される', en: 'Lose Lv.8 Unit' }, points: 9, id: 'action_5_lost_8' },
+            { text: { ja: 'Lv.9兵士を撃破される', en: 'Lose Lv.9 Unit' }, points: 10, id: 'action_5_lost_9' },
+            { text: { ja: 'Lv.10兵士を撃破される', en: 'Lose Lv.10 Unit' }, points: 11, id: 'action_5_lost_10' },
+            { text: { ja: 'Lv.11兵士を撃破される', en: 'Lose Lv.11 Unit' }, points: 12, id: 'action_5_lost_11' }, // ★追加
+
             { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_5_26' }
         ]
     }
@@ -413,7 +455,6 @@ function renderTable() {
                 btn.onclick = () => {
                     let currentVal = quantityInput.value.toString().trim();
                     // 既に末尾に単位がある場合、それを削除してから新しい単位をつける
-                    // (例: "1.5m" の状態で "G" を押したら "1.5g" にする)
                     if (/[kmg]$/i.test(currentVal)) {
                         currentVal = currentVal.slice(0, -1);
                     }
@@ -429,7 +470,7 @@ function renderTable() {
                     updateButtonStates(quantityInput.value);
                 };
                 
-                unitButtons.push(btn); // 配列に追加して後で操作できるようにする
+                unitButtons.push(btn);
                 return btn;
             };
 
