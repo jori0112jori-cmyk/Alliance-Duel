@@ -133,7 +133,6 @@ let lockedStates = {};
 const timeActionsKeywords = ["action_1_0", "action_2_0", "action_4_1", "action_4_3", "action_4_5", "action_5_2", "action_5_3", "action_5_4", "action_5_5"];
 const heroExpActionKeywords = ["action_0_2", "action_3_1"];
 
-// ▼▼▼ 修正: 入力時の挙動を安定化 ▼▼▼
 function createNumericInput(value, onBlur, readOnly = false) {
     const input = document.createElement('input');
     input.type = 'text'; 
@@ -143,11 +142,8 @@ function createNumericInput(value, onBlur, readOnly = false) {
     
     if(readOnly) input.classList.add('locked-input');
 
-    // フォーカス時の全選択を少し遅延させる（スマホでの挙動安定のため）
     input.onfocus = function() {
-        setTimeout(() => {
-            this.select();
-        }, 50);
+        setTimeout(() => { this.select(); }, 50);
     };
     
     input.onblur = onBlur;
@@ -211,23 +207,34 @@ function formatWithUnit(num) {
     return formatted.replace(/\.00(?=[a-zA-Z])/, '').replace(/(\.\d)0(?=[a-zA-Z])/, '$1');
 }
 
+// ▼▼▼ 数値変換ロジック（強化版：小数＋単位、全角対応） ▼▼▼
 function cleanAndParseNumber(value) {
     if (typeof value === 'number') return value;
-    if (typeof value !== 'string' || value.trim() === '') return 0;
-    let cleanedValue = value.replace(/,/g, '').trim().toLowerCase();
+    if (!value) return 0;
+
+    let str = value.toString().trim();
+    // 全角英数字を半角に変換
+    str = str.replace(/[Ａ-Ｚａ-ｚ０-９．]/g, function(s) {
+        return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
+
+    str = str.toLowerCase().replace(/,/g, '');
+
     let multiplier = 1;
-    if (cleanedValue.endsWith('g')) {
+    if (str.endsWith('g')) {
         multiplier = 1000000000;
-        cleanedValue = cleanedValue.slice(0, -1);
-    } else if (cleanedValue.endsWith('m')) {
+        str = str.slice(0, -1);
+    } else if (str.endsWith('m')) {
         multiplier = 1000000;
-        cleanedValue = cleanedValue.slice(0, -1);
-    } else if (cleanedValue.endsWith('k')) {
+        str = str.slice(0, -1);
+    } else if (str.endsWith('k')) {
         multiplier = 1000;
-        cleanedValue = cleanedValue.slice(0, -1);
+        str = str.slice(0, -1);
     }
-    let num = parseFloat(cleanedValue);
-    return (isNaN(num) || num < 0) ? 0 : num * multiplier;
+
+    const num = parseFloat(str);
+    if (isNaN(num)) return 0;
+    return Math.floor(num * multiplier);
 }
 
 function loadDataFromLocalStorage() {
@@ -268,6 +275,7 @@ function saveAllData() {
     localStorage.setItem('pointCalculationLockedStates', JSON.stringify(lockedStates));
 }
 
+// ▼▼▼ テーブル描画ロジック（単位ボタン追加版） ▼▼▼
 function renderTable() {
     const container = document.getElementById("tableContainer");
     container.innerHTML = '';
@@ -294,11 +302,13 @@ function renderTable() {
         const row = tbody.insertRow();
         const isLocked = lockedStates[currentDayIndex]?.[index];
 
+        // 1. 行動内容
         const actionCell = row.insertCell();
         actionCell.className = 'action-name';
         actionCell.textContent = actionInfo.text[currentLang];
         actionCell.setAttribute('data-label', headers[0]);
 
+        // 2. ポイント単価
         const pointsCell = row.insertCell();
         pointsCell.className = 'numeric';
         pointsCell.setAttribute('data-label', headers[1]);
@@ -322,11 +332,13 @@ function renderTable() {
         buttonGroup.append(pointsInput, lockButton);
         pointsCell.appendChild(buttonGroup);
 
+        // 3. 数量（ここにK, M, Gボタンを追加）
         const quantityCell = row.insertCell();
         quantityCell.className = 'numeric';
         quantityCell.setAttribute('data-label', headers[2]);
 
         if (timeActionsKeywords.includes(actionId)) {
+            // 時間系
             const timeWrapper = document.createElement('div');
             timeWrapper.className = 'time-inputs';
             const totalMinutes = quantity || 0;
@@ -339,9 +351,7 @@ function renderTable() {
                 inp.type = 'number';
                 inp.inputMode = 'decimal';
                 inp.value = val > 0 ? val : '';
-                inp.onfocus = function() { 
-                    setTimeout(() => { this.select(); }, 50); 
-                };
+                inp.onfocus = function() { setTimeout(() => { this.select(); }, 50); };
                 inp.onblur = callback;
                 return inp;
             };
@@ -359,8 +369,10 @@ function renderTable() {
             timeWrapper.append(daysInput, document.createTextNode('d'), hoursInput, document.createTextNode('h'), minutesInput, document.createTextNode('m'));
             quantityCell.appendChild(timeWrapper);
         } else {
-            const inputWrapper = document.createElement('div');
-            inputWrapper.className = 'input-with-unit';
+            // 通常の数値入力 + KMGボタン
+            const wrapper = document.createElement('div');
+            wrapper.className = 'input-with-buttons';
+
             const quantityInput = createNumericInput(
                 formatWithUnit(quantity),
                 () => {
@@ -368,10 +380,32 @@ function renderTable() {
                     recalculateRow(index, 'quantity');
                 }
             );
-            inputWrapper.appendChild(quantityInput);
-            quantityCell.appendChild(inputWrapper);
+
+            // ボタン生成ヘルパー
+            const createUnitBtn = (unit) => {
+                const btn = document.createElement('button');
+                btn.textContent = unit;
+                btn.className = 'unit-btn';
+                btn.type = 'button';
+                btn.onclick = () => {
+                    let currentVal = quantityInput.value;
+                    if (!currentVal) currentVal = "0";
+                    quantityInput.value = currentVal + unit;
+                    allDaysData[currentDayIndex][index][2] = cleanAndParseNumber(quantityInput.value);
+                    recalculateRow(index, 'quantity');
+                };
+                return btn;
+            };
+
+            wrapper.appendChild(quantityInput);
+            wrapper.appendChild(createUnitBtn('K'));
+            wrapper.appendChild(createUnitBtn('M'));
+            wrapper.appendChild(createUnitBtn('G'));
+
+            quantityCell.appendChild(wrapper);
         }
 
+        // 4. 獲得ポイント
         const totalPointsCell = row.insertCell();
         totalPointsCell.className = 'numeric';
         totalPointsCell.setAttribute('data-label', headers[3]);
@@ -384,6 +418,7 @@ function renderTable() {
         );
         totalPointsCell.appendChild(totalPointsInput);
 
+        // 5. クリア
         const resetCell = row.insertCell();
         resetCell.setAttribute('data-label', headers[4]);
         resetCell.className = 'reset-cell-container';
@@ -530,7 +565,7 @@ document.getElementById('daySelect').onchange = (event) => {
     renderTable();
 };
 
-// ▼▼▼ 修正: 画面の「横幅」が変わったときだけ再描画する（キーボードによる縦幅変化を無視） ▼▼▼
+// ▼▼▼ 画面の「横幅」が変わったときだけ再描画する（キーボードによる縦幅変化を無視） ▼▼▼
 let lastWidth = window.innerWidth;
 window.addEventListener('resize', () => {
     if (window.innerWidth !== lastWidth) {
