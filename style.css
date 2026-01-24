@@ -16,7 +16,7 @@ body {
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    padding-bottom: 220px; /* フッターが大きくなる分、余白を増やす */
+    padding-bottom: 220px; /* フッター用余白 */
 }
 
 /* ヘッダー */
@@ -43,7 +43,7 @@ h1 {
 
 .container { max-width: 1000px; margin: 0 auto; padding: 10px; }
 
-/* コントロール */
+/* コントロールエリア */
 .controls {
     background-color: #fff; padding: 10px; border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 15px;
@@ -61,7 +61,7 @@ button {
 #resetDayBtn, #stickyResetDayBtn { background-color: var(--warning-color); color: #333; }
 #resetAllBtn, #stickyResetAllBtn { background-color: var(--accent-color); }
 
-/* テーブル（PC） */
+/* テーブル基本（PC） */
 table {
     width: 100%; border-collapse: collapse; background-color: #fff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; table-layout: fixed;
@@ -82,18 +82,15 @@ input.locked-input { background-color: #e9ecef; color: #6c757d; }
 .button-group, .input-with-buttons { display: flex; align-items: center; gap: 4px; width: 100%; }
 .input-with-buttons input, .button-group input { flex: 1; min-width: 0; }
 
-/* 単位ボタン（選択状態のデザイン） */
+/* 単位ボタン */
 .unit-btn {
     background-color: #e9ecef; border: 1px solid #ced4da; color: #495057;
     font-size: 0.75rem; padding: 0 8px; height: 36px; line-height: 34px;
     min-width: 32px; flex-shrink: 0; transition: all 0.2s;
 }
 .unit-btn.active {
-    background-color: var(--primary-color);
-    color: #fff;
-    border-color: var(--primary-color);
-    font-weight: bold;
-    box-shadow: 0 0 4px rgba(74, 144, 226, 0.5);
+    background-color: var(--primary-color); color: #fff; border-color: var(--primary-color);
+    font-weight: bold; box-shadow: 0 0 4px rgba(74, 144, 226, 0.5);
 }
 
 .lock-btn { background-color: #e9ecef; border: 1px solid #ced4da; color: #6c757d; padding: 0 10px; height: 36px; min-width: 36px; }
@@ -103,7 +100,6 @@ input.locked-input { background-color: #e9ecef; color: #6c757d; }
 .time-inputs input { width: 40px !important; text-align: center; padding: 0; }
 .reset-btn { background-color: #fff; color: #e74c3c; border: 1px solid #e74c3c; width: 100%; justify-content: center; }
 
-/* 合計行（PC用） */
 .total-row { background-color: #2c3e50; color: white; }
 .total-row td { font-size: 1.1rem; font-weight: bold; }
 .numeric { font-family: 'Roboto Mono', monospace; text-align: right; }
@@ -115,20 +111,20 @@ input.locked-input { background-color: #e9ecef; color: #6c757d; }
     tr { margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.08); padding: 0; overflow: hidden; }
     tfoot tr { display: none; } tfoot td { display: none; }
     
-    td { border: none; border-bottom: 1px solid #f0f0f0; position: relative; padding: 12px 10px; display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
+    td { border: none; border-bottom: 1px solid #f0f0f0; position: relative; padding: 12px 10px; display: flex; justify-content: space-between; align-items: center; min-height: 48px; }
     td:last-child { border-bottom: none; }
     td:before { content: attr(data-label); font-weight: bold; color: #555; font-size: 0.85rem; flex-shrink: 0; width: 30%; margin-right: 10px; }
 
-    /* ★カードのタイトル（行動名）を見やすく修正 */
+    /* ★カードタイトルのデザイン強化 */
     td.action-name {
-        background-color: #eaf4fc; 
-        color: #1a252f; /* より濃い色に */
-        font-weight: 800; /* 太字を強調 */
-        border-bottom: 3px solid #abcfee; /* 下線を少し太く */
-        display: block; 
-        text-align: center; 
-        padding: 15px 10px; /* 余白を広く */
-        font-size: 1.1rem; /* 文字を大きく */
+        background-color: #34495e; /* 濃い紺色に変更 */
+        color: #fff; /* 白文字 */
+        font-weight: bold;
+        border-bottom: none;
+        display: block;
+        text-align: center;
+        padding: 12px 10px;
+        font-size: 1rem; /* 少し大きく */
         line-height: 1.4;
     }
     td.action-name:before { display: none; }
@@ -142,7 +138,7 @@ input.locked-input { background-color: #e9ecef; color: #6c757d; }
     .reset-btn { width: auto; margin-left: auto; padding: 8px 20px; font-size: 0.9rem; }
 }
 
-/* ▼▼▼ スマホ用固定フッター（合計表示改善） ▼▼▼ */
+/* ▼▼▼ スマホ用固定フッター（修正版） ▼▼▼ */
 .sticky-ui {
     position: fixed; bottom: 0; left: 0; width: 100%;
     background-color: rgba(255, 255, 255, 0.98); border-top: 1px solid #ccc;
@@ -151,10 +147,9 @@ input.locked-input { background-color: #e9ecef; color: #6c757d; }
 }
 .sticky-content-wrapper { max-width: 600px; margin: 0 auto; }
 
-/* 合計表示行：縦並びにして桁あふれを防止 */
 .total-display-row {
     display: flex;
-    flex-direction: column; /* 縦に積む */
+    flex-direction: column; /* 縦並び */
     align-items: flex-end; /* 右寄せ */
     margin-bottom: 8px;
     width: 100%;
@@ -163,19 +158,19 @@ input.locked-input { background-color: #e9ecef; color: #6c757d; }
     font-size: 0.8rem;
     font-weight: bold;
     color: #666;
-    margin-bottom: 2px;
-    width: 100%;
-    text-align: right; /* 「合計獲得ポイント」を右上に */
+    margin-bottom: 0px;
 }
 .total-display-row .value {
-    font-size: 1.8rem; /* 大きく表示 */
+    /* ★文字サイズを縮小して切れ防止 */
+    font-size: 1.5rem; 
     color: var(--primary-color);
     font-weight: bold;
     font-family: 'Roboto Mono', monospace;
     width: 100%;
     text-align: right;
-    line-height: 1.1;
-    overflow-wrap: break-word; /* 画面幅を超える場合は折り返す（念の為） */
+    line-height: 1.2;
+    overflow-wrap: break-word;
+    word-break: break-all; /* 強制的に折り返す（保険） */
 }
 
 .progress-container { width: 100%; height: 8px; background: #e9ecef; border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
