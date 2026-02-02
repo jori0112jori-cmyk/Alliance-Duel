@@ -608,19 +608,55 @@ function resetAllDataConfirmation() {
     }
 }
 
+// ▼▼▼ フッター更新処理（残りポイント表示機能追加） ▼▼▼
 function updateDayTotalPoints() {
     const sum = allDaysData[currentDayIndex].reduce((acc, actionData) => acc + cleanAndParseNumber(actionData[3]), 0);
     const formattedSum = formatNumber(sum);
     
+    // 合計値の更新
     if (document.getElementById('totalPoints')) document.getElementById('totalPoints').textContent = formattedSum;
     if (document.getElementById('stickyTotalValue')) document.getElementById('stickyTotalValue').textContent = formattedSum;
 
+    // プログレスバーとメッセージの更新
     const percentage = Math.min((sum / TARGET_SCORE) * 100, 100);
     const progressBar = document.getElementById('stickyProgressBar');
+    
+    // メッセージを表示する要素を取得（なければ作成）
+    let progressLabel = document.getElementById('progressStatusLabel');
+    if (!progressLabel && progressBar) {
+        // バーの親要素の中にテキスト表示用のspanを追加
+        progressLabel = document.createElement('div');
+        progressLabel.id = 'progressStatusLabel';
+        progressLabel.style.fontSize = '0.8rem';
+        progressLabel.style.textAlign = 'center';
+        progressLabel.style.marginTop = '2px';
+        progressLabel.style.fontWeight = 'bold';
+        progressBar.parentElement.parentElement.insertBefore(progressLabel, progressBar.parentElement);
+    }
+
     if(progressBar) {
         progressBar.style.width = percentage + '%';
-        if(percentage >= 100) progressBar.style.backgroundColor = '#28a745';
-        else progressBar.style.backgroundColor = 'var(--accent-color)';
+        
+        if(sum >= TARGET_SCORE) {
+            // 目標達成時
+            progressBar.style.backgroundColor = '#28a745'; // 緑色
+            if(progressLabel) {
+                progressLabel.textContent = (currentLang === 'ja') ? '目標達成！ (7.2Mクリア)' : 'Goal Reached!';
+                progressLabel.style.color = '#28a745';
+            }
+        } else {
+            // 未達時
+            progressBar.style.backgroundColor = '#e74c3c'; // 赤色（アクセントカラー）
+            const remaining = TARGET_SCORE - sum;
+            const formattedRemaining = formatWithUnit(remaining); // k/m/g 表記で見やすく
+            
+            if(progressLabel) {
+                progressLabel.textContent = (currentLang === 'ja') 
+                    ? `あと ${formattedRemaining} で7.2M` 
+                    : `${formattedRemaining} to go`;
+                progressLabel.style.color = '#e74c3c';
+            }
+        }
     }
 }
 
