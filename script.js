@@ -81,7 +81,7 @@ const duelData = [
             { text: { ja: 'Lv.8兵士を1体訓練', en: 'Train Lv.8 unit' }, points: 90, id: 'action_4_t8' },
             { text: { ja: 'Lv.9兵士を1体訓練', en: 'Train Lv.9 unit' }, points: 100, id: 'action_4_t9' },
             { text: { ja: 'Lv.10兵士を1体訓練', en: 'Train Lv.10 unit' }, points: 110, id: 'action_4_t10' },
-            { text: { ja: 'Lv.11兵士を1体訓練', en: 'Train Lv.11 unit' }, points: 120, id: 'action_4_t11' }, // ★追加
+            { text: { ja: 'Lv.11兵士を1体訓練', en: 'Train Lv.11 unit' }, points: 120, id: 'action_4_t11' },
 
             { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_4_16' },
             { text: { ja: 'ドミネーターのかけらを消費', en: 'Overlord Promotion Shard' }, points: 25000, id: 'action_4_17' },
@@ -112,7 +112,7 @@ const duelData = [
             { text: { ja: '相手連盟のLv.8兵士を撃破する', en: 'Kill Rival Lv.8 Unit' }, points: 135, id: 'action_5_k_rival_8' },
             { text: { ja: '相手連盟のLv.9兵士を撃破する', en: 'Kill Rival Lv.9 Unit' }, points: 150, id: 'action_5_k_rival_9' },
             { text: { ja: '相手連盟のLv.10兵士を撃破する', en: 'Kill Rival Lv.10 Unit' }, points: 165, id: 'action_5_k_rival_10' },
-            { text: { ja: '相手連盟のLv.11兵士を撃破する', en: 'Kill Rival Lv.11 Unit' }, points: 180, id: 'action_5_k_rival_11' }, // ★追加
+            { text: { ja: '相手連盟のLv.11兵士を撃破する', en: 'Kill Rival Lv.11 Unit' }, points: 180, id: 'action_5_k_rival_11' },
 
             // ▼ 通常の兵士撃破 (Lv1 - Lv11)
             { text: { ja: 'Lv.1兵士を撃破する', en: 'Kill Lv.1 Unit' }, points: 6, id: 'action_5_k_norm_1' },
@@ -125,7 +125,7 @@ const duelData = [
             { text: { ja: 'Lv.8兵士を撃破する', en: 'Kill Lv.8 Unit' }, points: 27, id: 'action_5_k_norm_8' },
             { text: { ja: 'Lv.9兵士を撃破する', en: 'Kill Lv.9 Unit' }, points: 30, id: 'action_5_k_norm_9' },
             { text: { ja: 'Lv.10兵士を撃破する', en: 'Kill Lv.10 Unit' }, points: 33, id: 'action_5_k_norm_10' },
-            { text: { ja: 'Lv.11兵士を撃破する', en: 'Kill Lv.11 Unit' }, points: 36, id: 'action_5_k_norm_11' }, // ★追加
+            { text: { ja: 'Lv.11兵士を撃破する', en: 'Kill Lv.11 Unit' }, points: 36, id: 'action_5_k_norm_11' },
 
             // ▼ 兵士損失 (Lv1 - Lv11)
             { text: { ja: 'Lv.1兵士を撃破される', en: 'Lose Lv.1 Unit' }, points: 5.0, id: 'action_5_lost_1' },
@@ -138,7 +138,7 @@ const duelData = [
             { text: { ja: 'Lv.8兵士を撃破される', en: 'Lose Lv.8 Unit' }, points: 22.5, id: 'action_5_lost_8' },
             { text: { ja: 'Lv.9兵士を撃破される', en: 'Lose Lv.9 Unit' }, points: 25.0, id: 'action_5_lost_9' },
             { text: { ja: 'Lv.10兵士を撃破される', en: 'Lose Lv.10 Unit' }, points: 27.5, id: 'action_5_lost_10' },
-            { text: { ja: 'Lv.11兵士を撃破される', en: 'Lose Lv.11 Unit' }, points: 30.0, id: 'action_5_lost_11' }, // ★追加
+            { text: { ja: 'Lv.11兵士を撃破される', en: 'Lose Lv.11 Unit' }, points: 30.0, id: 'action_5_lost_11' },
 
             { text: { ja: 'パック購入ダイヤを1個購入', en: 'Buy Packs (1 Diamond)' }, points: 30, id: 'action_5_26' }
         ]
@@ -255,6 +255,7 @@ function formatWithUnit(num) {
     return formatted.replace(/\.00(?=[a-zA-Z])/, '').replace(/(\.\d)0(?=[a-zA-Z])/, '$1');
 }
 
+// 【修正箇所】小数点対応のため Math.floor を削除しました
 function cleanAndParseNumber(value) {
     if (typeof value === 'number') return value;
     if (!value) return 0;
@@ -281,7 +282,8 @@ function cleanAndParseNumber(value) {
 
     const num = parseFloat(str);
     if (isNaN(num)) return 0;
-    return Math.floor(num * multiplier);
+    // 小数点を切り捨てずにそのまま返します
+    return num * multiplier;
 }
 
 function loadDataFromLocalStorage() {
@@ -322,7 +324,7 @@ function saveAllData() {
     localStorage.setItem('pointCalculationLockedStates', JSON.stringify(lockedStates));
 }
 
-// ▼▼▼ テーブル描画ロジック（ボタン選択表示対応版） ▼▼▼
+// ▼▼▼ テーブル描画ロジック（修正済） ▼▼▼
 function renderTable() {
     const container = document.getElementById("tableContainer");
     container.innerHTML = '';
@@ -419,10 +421,8 @@ function renderTable() {
             const wrapper = document.createElement('div');
             wrapper.className = 'input-with-buttons';
 
-            // ボタンの参照を保持するための配列
             const unitButtons = [];
 
-            // 単位ボタンの状態を更新する関数
             const updateButtonStates = (inputValue) => {
                 const str = inputValue.toString().toLowerCase().trim();
                 unitButtons.forEach(btn => {
@@ -443,27 +443,37 @@ function renderTable() {
                     updateButtonStates(quantityInput.value);
                 },
                 false,
-                (e) => { // onInput (入力中に即時反映)
+                (e) => { // onInput
                     updateButtonStates(e.target.value);
                 }
             );
 
-            // ボタン生成ヘルパー
+            // 【修正箇所】ボタン作成ロジック（選択解除＆スクロール防止）
             const createUnitBtn = (unit) => {
                 const btn = document.createElement('button');
                 btn.textContent = unit;
                 btn.className = 'unit-btn';
-                btn.type = 'button';
+                btn.type = 'button'; // フォーム送信やスクロールを防止
                 
-                btn.onclick = () => {
+                btn.onclick = (e) => {
+                    e.preventDefault(); // デフォルト動作を確実に防ぐ
+
                     let currentVal = quantityInput.value.toString().trim();
-                    // 既に末尾に単位がある場合、それを削除してから新しい単位をつける
-                    if (/[kmg]$/i.test(currentVal)) {
-                        currentVal = currentVal.slice(0, -1);
-                    }
+                    // 現在の数値部分だけを取得（末尾の単位があれば除去）
+                    let valWithoutUnit = currentVal.replace(/[kmg]$/i, '');
                     
-                    if (!currentVal) currentVal = "0";
-                    quantityInput.value = currentVal + unit;
+                    // 【選択取り消し機能】
+                    // 現在の値が、今回押されたボタンの単位で終わっているかチェック
+                    const isAlreadySelected = new RegExp(unit + '$', 'i').test(currentVal);
+
+                    if (isAlreadySelected) {
+                        // ■ 既に選択中なら → 単位を消して数字だけにする（オフ）
+                        quantityInput.value = valWithoutUnit;
+                    } else {
+                        // ■ 選択されていないなら → 単位をつける（オン/切り替え）
+                        if (!valWithoutUnit) valWithoutUnit = "0";
+                        quantityInput.value = valWithoutUnit + unit;
+                    }
                     
                     // 保存と再計算
                     allDaysData[currentDayIndex][index][2] = cleanAndParseNumber(quantityInput.value);
@@ -482,7 +492,6 @@ function renderTable() {
             wrapper.appendChild(createUnitBtn('M'));
             wrapper.appendChild(createUnitBtn('G'));
             
-            // 初期表示時にボタンの状態を反映
             updateButtonStates(quantityInput.value);
 
             quantityCell.appendChild(wrapper);
@@ -531,6 +540,8 @@ function recalculateRow(rowIndex, lastEdited) {
     let [actionId, pointsPerUnit, quantity, totalPoints] = allDaysData[currentDayIndex][rowIndex];
     if (lastEdited === 'quantity' || lastEdited === 'points') {
         let multiplier = heroExpActionKeywords.includes(actionId) ? 1 / 660 : 1;
+        // ポイント自体は整数にしたい場合は Math.floor を残しますが、
+        // 計算の元となる quantity は小数が許容されています。
         totalPoints = Math.floor(quantity * pointsPerUnit * multiplier);
         allDaysData[currentDayIndex][rowIndex][3] = totalPoints;
     } else if (lastEdited === 'totalPoints') {
@@ -669,8 +680,3 @@ window.onload = function() {
     document.getElementById('tableContainer').style.visibility = 'visible';
     document.getElementById('tableContainer').style.opacity = '1';
 };
-
-
-
-
-
