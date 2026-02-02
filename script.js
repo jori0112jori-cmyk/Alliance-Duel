@@ -255,7 +255,6 @@ function formatWithUnit(num) {
     return formatted.replace(/\.00(?=[a-zA-Z])/, '').replace(/(\.\d)0(?=[a-zA-Z])/, '$1');
 }
 
-// 【修正箇所】小数点対応のため Math.floor を削除しました
 function cleanAndParseNumber(value) {
     if (typeof value === 'number') return value;
     if (!value) return 0;
@@ -324,7 +323,7 @@ function saveAllData() {
     localStorage.setItem('pointCalculationLockedStates', JSON.stringify(lockedStates));
 }
 
-// ▼▼▼ テーブル描画ロジック（修正済） ▼▼▼
+// ▼▼▼ テーブル描画ロジック ▼▼▼
 function renderTable() {
     const container = document.getElementById("tableContainer");
     container.innerHTML = '';
@@ -448,7 +447,6 @@ function renderTable() {
                 }
             );
 
-            // 【修正箇所】ボタン作成ロジック（選択解除＆スクロール防止）
             const createUnitBtn = (unit) => {
                 const btn = document.createElement('button');
                 btn.textContent = unit;
@@ -459,18 +457,14 @@ function renderTable() {
                     e.preventDefault(); // デフォルト動作を確実に防ぐ
 
                     let currentVal = quantityInput.value.toString().trim();
-                    // 現在の数値部分だけを取得（末尾の単位があれば除去）
                     let valWithoutUnit = currentVal.replace(/[kmg]$/i, '');
                     
                     // 【選択取り消し機能】
-                    // 現在の値が、今回押されたボタンの単位で終わっているかチェック
                     const isAlreadySelected = new RegExp(unit + '$', 'i').test(currentVal);
 
                     if (isAlreadySelected) {
-                        // ■ 既に選択中なら → 単位を消して数字だけにする（オフ）
                         quantityInput.value = valWithoutUnit;
                     } else {
-                        // ■ 選択されていないなら → 単位をつける（オン/切り替え）
                         if (!valWithoutUnit) valWithoutUnit = "0";
                         quantityInput.value = valWithoutUnit + unit;
                     }
@@ -479,7 +473,6 @@ function renderTable() {
                     allDaysData[currentDayIndex][index][2] = cleanAndParseNumber(quantityInput.value);
                     recalculateRow(index, 'quantity');
                     
-                    // ボタンの光り方を更新
                     updateButtonStates(quantityInput.value);
                 };
                 
@@ -536,12 +529,15 @@ function renderTable() {
     updateDayTotalPoints();
 }
 
+// 【重要修正】スクロール位置を保持して再描画する処理を追加
 function recalculateRow(rowIndex, lastEdited) {
+    // 画面のスクロール位置を保存
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
     let [actionId, pointsPerUnit, quantity, totalPoints] = allDaysData[currentDayIndex][rowIndex];
     if (lastEdited === 'quantity' || lastEdited === 'points') {
         let multiplier = heroExpActionKeywords.includes(actionId) ? 1 / 660 : 1;
-        // ポイント自体は整数にしたい場合は Math.floor を残しますが、
-        // 計算の元となる quantity は小数が許容されています。
         totalPoints = Math.floor(quantity * pointsPerUnit * multiplier);
         allDaysData[currentDayIndex][rowIndex][3] = totalPoints;
     } else if (lastEdited === 'totalPoints') {
@@ -553,24 +549,39 @@ function recalculateRow(rowIndex, lastEdited) {
             allDaysData[currentDayIndex][rowIndex][2] = 0;
         }
     }
+    
     renderTable();
     saveAllData();
+
+    // 画面のスクロール位置を復元（これがページトップ移動を防ぎます）
+    window.scrollTo(scrollX, scrollY);
 }
 
 function handleLockToggle(rowIndex) {
+    // 念のためここでもスクロール保持
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    
     if (!lockedStates[currentDayIndex]) lockedStates[currentDayIndex] = {};
     lockedStates[currentDayIndex][rowIndex] = !lockedStates[currentDayIndex][rowIndex];
     renderTable();
     saveAllData();
+    
+    window.scrollTo(scrollX, scrollY);
 }
 
 function handleActionReset(rowIndex) {
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
     const originalPointsValue = duelData[currentDayIndex].actions[rowIndex].points;
     const isLocked = lockedStates[currentDayIndex]?.[rowIndex];
     const pointsToSet = isLocked ? allDaysData[currentDayIndex][rowIndex][1] : originalPointsValue;
     allDaysData[currentDayIndex][rowIndex] = [allDaysData[currentDayIndex][rowIndex][0], pointsToSet, 0, 0];
     renderTable();
     saveAllData();
+
+    window.scrollTo(scrollX, scrollY);
 }
 
 function resetCurrentDayData() {
