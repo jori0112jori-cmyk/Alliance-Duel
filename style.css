@@ -115,16 +115,23 @@ input.locked-input { background-color: #e9ecef; color: #6c757d; }
     td:last-child { border-bottom: none; }
     td:before { content: attr(data-label); font-weight: bold; color: #555; font-size: 0.85rem; flex-shrink: 0; width: 30%; margin-right: 10px; }
 
-    /* ★カードタイトルのデザイン強化 */
+    /* ★カードタイトルのデザイン強化（修正済み） */
     td.action-name {
         background-color: #34495e; /* 濃い紺色 */
         color: #fff; /* 白文字 */
         font-weight: 800; /* 太字 */
         border-bottom: 3px solid #2c3e50;
-        display: block;
-        text-align: center;
+        
+        /* ▼▼▼ ここを変更しました ▼▼▼ */
+        display: flex;               /* Flexboxに変更 */
+        justify-content: center;     /* 左右中央揃え */
+        align-items: center;         /* 上下中央揃え */
+        text-align: center;          /* テキスト内の行揃え */
+        min-height: 3.5rem;          /* 最低限の高さを確保 */
+        /* ▲▲▲ ここまで ▲▲▲ */
+
         padding: 15px 10px;
-        font-size: 1.1rem; /* 大きく */
+        font-size: 1.1rem; 
         line-height: 1.4;
     }
     td.action-name:before { display: none; }
